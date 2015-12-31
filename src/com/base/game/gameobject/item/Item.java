@@ -30,7 +30,7 @@ public class Item extends GameObject
     @Override
     public void update()
     {
-        if (Physics.checkCollisions(this, player))
+        if (Physics.checkCollisions(this, player) != null)
         {
             pickUp();
         }
@@ -49,7 +49,7 @@ public class Item extends GameObject
     {
         this.x = x;
         this.y = y;
-        this.type = 1;
+        this.type = ITEM_ID;
         this.spr = new Sprite(r, g, b, width, height);
         this.name = name;
     }

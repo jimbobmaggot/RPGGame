@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 public class Physics
 {
 
-    public static boolean checkCollisions(GameObject go1, GameObject go2)
+    public static GameObject checkCollisions(GameObject go1, GameObject go2)
     {
         Rectangle r1 = new Rectangle(
                 (int) go1.getX(),
@@ -22,6 +22,14 @@ public class Physics
                 (int) go2.getWidth(),
                 (int) go2.getHeight());
 
-        return r1.intersects(r2);
+        boolean res = r1.intersects(r2);
+
+        if (res)
+        {
+            return go2;
+        } else
+        {
+            return null;
+        }
     }
 }

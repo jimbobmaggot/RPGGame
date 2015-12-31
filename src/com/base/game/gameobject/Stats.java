@@ -10,11 +10,23 @@ public class Stats
     public static final double LEVEL_CONST = 25 * (Math.pow(3, 3.0 / 2.0));
 
     private float xp;
+    private int level;
+    private boolean levelable;
     private int health;
 
-    public Stats(float xp)
+    public Stats(float xp, boolean levelable)
     {
-        this.xp = xp;
+        this.levelable = levelable;
+
+        if (levelable)
+        {
+            this.xp = xp;
+            this.level = 1;
+        } else
+        {
+            this.xp = -1;
+            this.level = (int) xp;
+        }
         this.health = getMaxHealth();
     }
 
@@ -25,6 +37,11 @@ public class Stats
 
     public int getLevel()
     {
+        if (!levelable)
+        {
+            return level;
+        }
+
         double tempxp = xp + 105;
         double a = Math.sqrt(243 * (tempxp * tempxp) + 4050 * tempxp + 17500);
         double c = (3 * tempxp + 25) / 25;

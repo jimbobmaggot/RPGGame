@@ -1,6 +1,7 @@
 package com.base.game;
 
 import com.base.engine.GameObject;
+import com.base.game.gameobject.CookieMonster;
 import com.base.game.gameobject.Player;
 import com.base.game.gameobject.item.Cube;
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ import org.lwjgl.opengl.Display;
  */
 public class Game
 {
-
     private final ArrayList<GameObject> objects;
     private final ArrayList<GameObject> remove;
     private final Player player;
@@ -26,6 +26,7 @@ public class Game
                 Display.getHeight() / 2 - Player.SIZE / 2);
         objects.add(player);
         objects.add(new Cube(32, 32, player));
+        objects.add(new CookieMonster(300, 500, 1));
     }
 
     public void getInput()
@@ -62,5 +63,20 @@ public class Game
                 {
                     go.render();
         });
+    }
+
+    public ArrayList<GameObject> sphereCollide(float x, float y, float radius)
+    {
+        ArrayList<GameObject> res = new ArrayList<GameObject>();
+
+        for (GameObject go : objects)
+        {
+            if (Util.dist(go.getX(), go.getY(), x, y) < radius)
+            {
+                res.add(go);
+            }
+        }
+
+        return res;
     }
 }
