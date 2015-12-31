@@ -7,8 +7,8 @@ package com.base.engine;
 public class Frame
 {
 
-    private int length;
-    private Sprite spr;
+    private final int length;
+    private final Sprite spr;
     private int numDisplayed;
 
     public Frame(Sprite spr, int length)

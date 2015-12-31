@@ -1,6 +1,7 @@
 package com.base.game.gameobject;
 
 import com.base.engine.GameObject;
+import com.base.game.gameobject.item.Item;
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -11,25 +12,29 @@ public class Player extends GameObject
 {
 
     public static final int SIZE = 32;
+    public static final double LEVEL_CONST = 25 * (Math.pow(3, 3.0 / 2.0));
 
     private int health;
     private float xp;
 
     public Player(float x, float y)
     {
-        init(x, y, 0.1f, 1f, 0.25f, SIZE, SIZE);
+        init(x, y, 0.1f, 1f, 0.25f, SIZE, SIZE, 0);
         health = 10;
         xp = 0;
     }
-    
+
     @Override
-    public void update(){
-        System.out.println("Stats: SPEED: " + getSpeed() +
-                " LEVEL: " + getLevel() +
-                " MAXHP: " + getMaxHealth() + 
-                " HP: " + getCurrentHealth() + 
-                " STRENGTH: " + getStrength() + 
-                " MAGIC: " + getMagic());
+    public void update()
+    {
+        /*
+        System.out.println("Stats: SPEED: " + getSpeed()
+                + " LEVEL: " + getLevel()
+                + " MAXHP: " + getMaxHealth()
+                + " HP: " + getCurrentHealth()
+                + " STRENGTH: " + getStrength()
+                + " MAGIC: " + getMagic());
+         */
     }
 
     public void getInput()
@@ -65,7 +70,12 @@ public class Player extends GameObject
 
     public int getLevel()
     {
-        return (int)(xp / 50) + 1;
+        double tempxp = xp + 105;
+        double a = Math.sqrt(243 * (tempxp * tempxp) + 4050 * tempxp + 17500);
+        double c = (3 * tempxp + 25) / 25;
+        double d = Math.cbrt(a / LEVEL_CONST + c);
+
+        return (int) (d - 1.0 / d * 3) - 1;
     }
 
     public int getMaxHealth()
@@ -87,13 +97,19 @@ public class Player extends GameObject
     {
         return getLevel() * 4;
     }
-    
-    public int getMagic(){
+
+    public int getMagic()
+    {
         return getLevel() * 4;
     }
 
     public void addXp(float amt)
     {
         xp += amt;
+    }
+
+    public void addItem(Item item)
+    {
+        System.out.println("We just picked up an item!");
     }
 }

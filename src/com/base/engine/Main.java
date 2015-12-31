@@ -50,7 +50,7 @@ public class Main
         glLoadIdentity();
 
         game.render();
-        
+
         Display.update();
         Display.sync(60);
     }

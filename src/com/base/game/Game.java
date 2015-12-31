@@ -2,6 +2,7 @@ package com.base.game;
 
 import com.base.engine.GameObject;
 import com.base.game.gameobject.Player;
+import com.base.game.gameobject.item.Cube;
 import java.util.ArrayList;
 import org.lwjgl.opengl.Display;
 
@@ -12,15 +13,19 @@ import org.lwjgl.opengl.Display;
 public class Game
 {
 
-    private ArrayList<GameObject> objects;
-    private Player player;
+    private final ArrayList<GameObject> objects;
+    private final ArrayList<GameObject> remove;
+    private final Player player;
 
     public Game()
     {
-        objects = new ArrayList<GameObject>();
-        
-        player = new Player(Display.getWidth() / 2 - Player.SIZE / 2, Display.getHeight() / 2 - Player.SIZE / 2);
+        objects = new ArrayList<>();
+        remove = new ArrayList<>();
+
+        player = new Player(Display.getWidth() / 2 - Player.SIZE / 2,
+                Display.getHeight() / 2 - Player.SIZE / 2);
         objects.add(player);
+        objects.add(new Cube(32, 32, player));
     }
 
     public void getInput()
@@ -30,17 +35,32 @@ public class Game
 
     public void update()
     {
-        for (GameObject go : objects)
-        {
-            go.update();
-        }
+        objects.stream().forEach((go)
+                -> 
+                {
+                    if (!go.getRemove())
+                    {
+                        go.update();
+                    } else
+                    {
+                        remove.add(go);
+                    }
+        });
+
+        remove.stream().forEach((go)
+                -> 
+                {
+                    objects.remove(go);
+        });
+
     }
 
     public void render()
     {
-        for (GameObject go : objects)
-        {
-            go.render();
-        }
+        objects.stream().forEach((go)
+                -> 
+                {
+                    go.render();
+        });
     }
 }

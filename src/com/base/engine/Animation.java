@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class Animation
 {
 
-    private ArrayList<Frame> frames;
+    private final ArrayList<Frame> frames;
     private int curFrame;
 
     public Animation()
     {
-        frames = new ArrayList<Frame>();
+        frames = new ArrayList<>();
     }
-    
+
     public void render()
     {
         Frame temp = frames.get(curFrame);

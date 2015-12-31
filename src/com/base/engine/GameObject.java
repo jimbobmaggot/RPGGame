@@ -11,7 +11,10 @@ public abstract class GameObject
 
     protected float x;
     protected float y;
+    protected int type;
     protected Sprite spr;
+
+    protected boolean remove = false;
 
     public void update()
     {
@@ -43,8 +46,8 @@ public abstract class GameObject
     {
         return y;
     }
-    
-     /**
+
+    /**
      * @return the width
      */
     public float getWidth()
@@ -59,10 +62,41 @@ public abstract class GameObject
     {
         return spr.getHeight();
     }
-    
-    protected void init(float x, float y, float r, float g, float b, float width, float height){
+
+    public int getType()
+    {
+        return type;
+    }
+
+    public boolean getRemove()
+    {
+        return remove;
+    }
+
+    public void remove()
+    {
+        remove = true;
+    }
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param r
+     * @param g
+     * @param b
+     * @param width
+     * @param height
+     * @param type
+     */
+    protected void init(
+            float x, float y,
+            float r, float g, float b,
+            float width, float height, int type)
+    {
         this.x = x;
         this.y = y;
+        this.type = type;
         this.spr = new Sprite(r, g, b, width, height);
     }
 

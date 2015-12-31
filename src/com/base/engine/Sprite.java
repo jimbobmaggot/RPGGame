@@ -70,6 +70,5 @@ public class Sprite
     {
         this.height = height;
     }
-    
 
 }
