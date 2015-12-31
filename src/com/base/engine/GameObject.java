@@ -1,5 +1,7 @@
 package com.base.engine;
 
+import static org.lwjgl.opengl.GL11.*;
+
 /**
  *
  * @author Stephen Rumpel
@@ -7,9 +9,9 @@ package com.base.engine;
 public abstract class GameObject
 {
 
-    public float x;
-    public float y;
-    private Animation anim;
+    protected float x;
+    protected float y;
+    protected Sprite spr;
 
     public void update()
     {
@@ -18,7 +20,12 @@ public abstract class GameObject
 
     public void render()
     {
-
+        glPushMatrix();
+        {
+            glTranslatef(x, y, 0);
+            spr.render();
+        }
+        glPopMatrix();
     }
 
     /**
@@ -35,6 +42,28 @@ public abstract class GameObject
     public float getY()
     {
         return y;
+    }
+    
+     /**
+     * @return the width
+     */
+    public float getWidth()
+    {
+        return spr.getWidth();
+    }
+
+    /**
+     * @return the height
+     */
+    public float getHeight()
+    {
+        return spr.getHeight();
+    }
+    
+    protected void init(float x, float y, float r, float g, float b, float width, float height){
+        this.x = x;
+        this.y = y;
+        this.spr = new Sprite(r, g, b, width, height);
     }
 
 }

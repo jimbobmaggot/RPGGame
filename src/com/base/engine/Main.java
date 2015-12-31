@@ -1,5 +1,6 @@
 package com.base.engine;
 
+import com.base.game.Game;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.LWJGLException;

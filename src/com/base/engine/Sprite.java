@@ -13,10 +13,10 @@ public class Sprite
     private float g;
     private float b;
 
-    private float width;
-    private float height;
+    public float width;
+    public float height;
 
-    public void Sprite(float r, float g, float b, float width, float height)
+    public Sprite(float r, float g, float b, float width, float height)
     {
         this.r = r;
         this.g = g;
@@ -32,11 +32,44 @@ public class Sprite
         glBegin(GL_QUADS);
         {
             glVertex2f(0, 0);
-            glVertex2f(0, height);
-            glVertex2f(width, height);
-            glVertex2f(width, 0);
+            glVertex2f(0, getHeight());
+            glVertex2f(getWidth(), getHeight());
+            glVertex2f(getWidth(), 0);
         }
         glEnd();
     }
+
+    /**
+     * @return the width
+     */
+    public float getWidth()
+    {
+        return width;
+    }
+
+    /**
+     * @return the height
+     */
+    public float getHeight()
+    {
+        return height;
+    }
+
+    /**
+     * @param width the width to set
+     */
+    public void setWidth(float width)
+    {
+        this.width = width;
+    }
+
+    /**
+     * @param height the height to set
+     */
+    public void setHeight(float height)
+    {
+        this.height = height;
+    }
+    
 
 }
