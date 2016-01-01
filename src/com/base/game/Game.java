@@ -13,6 +13,7 @@ import org.lwjgl.opengl.Display;
  */
 public class Game
 {
+
     private final ArrayList<GameObject> objects;
     private final ArrayList<GameObject> remove;
     private final Player player;
@@ -67,15 +68,17 @@ public class Game
 
     public ArrayList<GameObject> sphereCollide(float x, float y, float radius)
     {
-        ArrayList<GameObject> res = new ArrayList<GameObject>();
+        ArrayList<GameObject> res = new ArrayList<>();
 
-        for (GameObject go : objects)
-        {
-            if (Util.dist(go.getX(), go.getY(), x, y) < radius)
-            {
-                res.add(go);
-            }
-        }
+        //for GameObject go : objects
+        objects.stream().filter((go)
+                //If
+                -> (Util.dist(go.getX(), go.getY(), x, y) < radius)).forEach((go)
+                -> 
+                {
+                    //Then
+                    res.add(go);
+        });
 
         return res;
     }

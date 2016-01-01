@@ -1,6 +1,7 @@
 package com.base.engine;
 
 import com.base.game.Game;
+import com.base.game.Time;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +31,10 @@ public class Main
         cleanUp();
     }
 
-    public static ArrayList<GameObject> sphereCollide(float x, float y, float radius)
+    public static ArrayList<GameObject> sphereCollide(
+            float x,
+            float y,
+            float radius)
     {
         return game.sphereCollide(x, y, radius);
     }
@@ -74,8 +78,10 @@ public class Main
 
     private static void gameLoop()
     {
+        Time.init();
         while (!Display.isCloseRequested())
         {
+            Time.update();
             getInput();
             update();
             render();
@@ -97,7 +103,8 @@ public class Main
             Keyboard.create();
             Display.setVSyncEnabled(true);
 
-        } catch (LWJGLException ex)
+        }
+        catch (LWJGLException ex)
         {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

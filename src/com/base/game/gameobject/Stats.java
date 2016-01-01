@@ -10,8 +10,8 @@ public class Stats
     public static final double LEVEL_CONST = 25 * (Math.pow(3, 3.0 / 2.0));
 
     private float xp;
-    private int level;
-    private boolean levelable;
+    private final int level;
+    private final boolean levelable;
     private int health;
 
     public Stats(float xp, boolean levelable)
@@ -78,5 +78,9 @@ public class Stats
     public void addXp(float amt)
     {
         xp += amt;
+    }
+    
+    public void damage(int amt){
+        health -= amt;
     }
 }
